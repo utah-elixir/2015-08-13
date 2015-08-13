@@ -3,10 +3,22 @@ defmodule DistributedFun.RPC do
     raise UndefinedFunctionError, module: module, function: function, arity: length(args)
   end
   def call(nodes, module, function, args) do
+    :random.seed(:erlang.now())
     nodes
-    |> Enum.at(:random.uniform(length(nodes)) - 1)
-    |> connect()
-    |> :rpc.call(module, function, args)
+    |> Enum.shuffle()
+    |> try_call(module, function, args)
+  end
+
+  defp try_call([], _, _, _) do
+    {:error, :nodes_down}
+  end
+  defp try_call([node | rest], module, function, args) do
+    case :rpc.call(connect(node), module, function, args) do
+      {:badrpc, _} ->
+        try_call(rest, module, function, args)
+      res ->
+        res
+    end
   end
 
   def multicall(nodes, module, function, args) do

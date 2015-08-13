@@ -1,6 +1,7 @@
 defmodule DistributedFun do
   def start(_, _) do
     :rl.cmd(['lib/**/*.ex', 'mix compile'])
+    :ets.new(__MODULE__.RPC, [:public, {:read_concurrency, true}, :named_table])
     DistributedFun.Supervisor.start_link()
   end
 

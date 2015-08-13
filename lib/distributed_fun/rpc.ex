@@ -35,9 +35,14 @@ defmodule DistributedFun.RPC do
     end
   end
 
-  defp connect({ip, user}) do
+  defp connect({ip, user} = key) do
     node = format_node(ip, user)
-    Node.ping(node) && node
+    case :ets.lookup(__MODULE__, key) do
+      [] ->
+        Node.ping(node) && :ets.insert(__MODULE__, {key, true}) && node
+      _v ->
+        node
+    end
   end
 
   defp format_node({a, b, c, d}, user) do

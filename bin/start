@@ -1,0 +1,10 @@
+#!/bin/sh
+
+IP=`ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1'`
+NODE="${USER:0:1}@$IP"
+COOKIE="utah-elixir"
+
+iex \
+  --name $NODE \
+  --cookie $COOKIE \
+  -S mix

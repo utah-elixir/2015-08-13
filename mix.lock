@@ -1,0 +1,2 @@
+%{"dht": {:git, "git://github.com/camshaft/dht.git", "130ee65a6fbd11604c7e9219d460ba22b3f4a965", [ref: "130ee65a6fbd11604c7e9219d460ba22b3f4a965"]},
+  "rl": {:git, "git://github.com/camshaft/rl.git", "fba1138276f8817bc132e596acb60bf185a0a8f8", [ref: "fba1138276f8817bc132e596acb60bf185a0a8f8"]}}

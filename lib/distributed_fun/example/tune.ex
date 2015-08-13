@@ -6,6 +6,9 @@ defmodule DistributedFun.Example.Tune do
   def play({note, length}) do
     play({note, length, "sin"})
   end
+  def play({_note, length, _type}) when length > 3 or length <= 0 do
+    throw :note_out_of_range
+  end
   def play({note, length, type}) do
     note = note |> to_string |> String.upcase
     args = ["-qn", "synth", to_string(length), to_string(type), note]

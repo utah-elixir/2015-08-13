@@ -59,3 +59,9 @@ iex(c@127.0.0.1)2> DistributedFun.Example.Say.call("Hello, there!")
 iex(c@127.0.0.1)1> DistributedFun.Example.Tune.register()
 iex(c@127.0.0.1)1> DistributedFun.Example.Tune.call(c: 1)
 ```
+
+### Rick Roll
+```sh
+iex(c@127.0.0.1)1> DistributedFun.Example.RickRoll.register()
+iex(c@127.0.0.1)1> DistributedFun.Example.RickRoll.call()
+```
